@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Placement Preparation Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      padding: 20px;
+    }
+    .container {
+      max-width: 550px;
+      margin: auto;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+    }
+    select, input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 15px;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    .result {
+      margin-top: 15px;
+      background: #eef2f5;
+      padding: 15px;
+      border-radius: 5px;
+    }
+    .result h4 {
+      margin-bottom: 8px;
+    }
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: gray;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Placement Preparation Generator</h2>
+
+  <select id="target">
+    <option value="">Select Target Company Type</option>
+    <option value="product">Product-Based Company</option>
+    <option value="service">Service-Based Company</option>
+  </select>
+
+  <input type="number" id="time" placeholder="Time available (in months: 1 – 48)">
+
+  <select id="level">
+    <option value="">Select Your Skill Level</option>
+    <option value="beginner">Beginner</option>
+    <option value="intermediate">Intermediate</option>
+  </select>
+
+  <button onclick="generatePlan()">Generate Preparation Plan</button>
+
+  <div id="output" class="result"></div>
+
+  <div class="footer">
+    @santhoshKumar
+  </div>
+</div>
+
+<script>
+function generatePlan() {
+  let target = document.getElementById("target").value;
+  let months = parseInt(document.getElementById("time").value);
+  let level = document.getElementById("level").value;
+  let output = document.getElementById("output");
+
+  if (!target || !level || isNaN(months) || months < 1 || months > 48) {
+    output.innerHTML = "Please enter valid details (1 to 48 months).";
+    return;
+  }
+
+  let plan = "<h4>Personalized Preparation Plan</h4><ul>";
+
+  /* -------- Time-based efficient planning -------- */
+
+  if (months <= 2) {
+    plan += `
+      <li>Revise basic DSA patterns (arrays, strings, basics)</li>
+      <li>Important aptitude & logical reasoning</li>
+      <li>Common HR and technical interview questions</li>
+      <li>Resume correction and confidence building</li>
+    `;
+  }
+  else if (months <= 6) {
+    plan += `
+      <li>Complete DSA fundamentals (arrays, stacks, queues, recursion)</li>
+      <li>Core CS basics: OS, DBMS, CN, OOPS</li>
+      <li>Build 1 strong mini project</li>
+      <li>Weekly mock tests & coding practice</li>
+    `;
+  }
+  else if (months <= 12) {
+    plan += `
+      <li>Advanced DSA & problem-solving speed</li>
+      <li>Deep understanding of core CS subjects</li>
+      <li>2–3 real-world projects</li>
+      <li>Regular mock interviews</li>
+    `;
+  }
+  else if (months <= 24) {
+    plan += `
+      <li>DSA optimization & competitive coding</li>
+      <li>Internships / open-source contribution</li>
+      <li>System design fundamentals</li>
+      <li>Company-specific preparation</li>
+    `;
+  }
+  else {
+    plan += `
+      <li>Advanced system design & architecture</li>
+      <li>Product-level development experience</li>
+      <li>Leadership, mentoring, and tech blogging</li>
+      <li>High-level problem solving & specialization</li>
+    `;
+  }
+
+  /* -------- Company-type specific focus -------- */
+
+  if (target === "service") {
+    plan += `
+      <li>Strong focus on aptitude & verbal ability</li>
+      <li>Company-specific patterns (TCS, Infosys, Wipro)</li>
+    `;
+  } else {
+    plan += `
+      <li>High-quality DSA practice (LeetCode / CodeStudio)</li>
+      <li>Project depth & technical interview rounds</li>
+    `;
+  }
+
+  /* -------- Skill-level adjustment -------- */
+
+  if (level === "beginner") {
+    plan += `
+      <li>Start from basics, avoid rushing advanced topics</li>
+      <li>Consistency is more important than speed</li>
+    `;
+  } else {
+    plan += `
+      <li>Focus on accuracy, optimization & interview readiness</li>
+      <li>Participate in mock interviews frequently</li>
+    `;
+  }
+
+  plan += "</ul>";
+  output.innerHTML = plan;
+}
+</script>
+
+</body>
+</html>
